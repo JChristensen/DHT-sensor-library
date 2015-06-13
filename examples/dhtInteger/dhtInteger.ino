@@ -24,9 +24,8 @@ void loop(void)
 {
     delay(2000);    //must wait at least 2 seconds between measurements (it's a slow sensor)
     int c10, rh10;
-    if ( dht.read() )
+    if ( dht.getData(&c10, &rh10) )
     {
-        dht.getData( &c10, &rh10 );
         Serial << c10 << F(" C*10\t") << rh10 << F(" %RH*10\n");
     }
     else

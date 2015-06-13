@@ -36,7 +36,7 @@ class DHT {
   float computeHeatIndex(float tempFahrenheit, float percentHumidity);
   float readHumidity(void);
   boolean read(void);
-  void getData(int* c10, int* rh10);
+  boolean getData(int* c10, int* rh10);
 
 };
 #endif

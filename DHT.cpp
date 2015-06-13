@@ -179,12 +179,20 @@ boolean DHT::read(void) {
 }
 
 //return temperature as degrees Celsius times 10 and
-//relative humidity times 10.
-//this avoids floating point overhead.
-void DHT::getData(int* c10, int* rh10)
+//relative humidity times 10. this avoids floating point overhead.
+//returns true if reading the sensor was successful, else false.
+boolean DHT::getData(int* c10, int* rh10)
 {
-    int c = ( (data[2] & 0x7F) << 8 ) + data[3];
-    if ( data[2] & 0x80 ) c = -c;
-    *c10 = c;
-    *rh10 = ( data[0] << 8 ) + data[1];
+    if ( read() )
+    {
+        int c = ( (data[2] & 0x7F) << 8 ) + data[3];
+        if ( data[2] & 0x80 ) c = -c;
+        *c10 = c;
+        *rh10 = ( data[0] << 8 ) + data[1];
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
